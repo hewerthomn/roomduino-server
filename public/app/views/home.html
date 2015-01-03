@@ -1,0 +1,38 @@
+<h3 class="text-center"><i class="fa fa-dashboard text-muted"></i> Monitor</h3>
+<hr>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3>
+			Clima
+			<small class="pull-right text-muted" rd-timeago="{{temperature.created_at}}">
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+    <div role="tabpanel" class="tab-pane active" id="clima">
+			<div class="row">
+				<div class="col-xs-5">
+    			<br>
+					<h1 style="font-size: 3.5em">
+						{{ temperature.temperature }}
+						<small>°C</small>
+					</h1>
+				</div>
+				<div class="col-xs-7 text-right">
+					<h4>
+						Umidade do ar <br>
+						<b>{{ temperature.humidity }}%</b>
+					</h4>
+					<hr>
+					<h4>
+						Ponto de orvalho <br>
+						<b class="text-{{ levelDewPoint(temperature.dew_point) }} %">
+							{{ temperature.dew_point }} %
+						</b>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
