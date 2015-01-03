@@ -1,1 +1,4 @@
 /vendor
+servers.php
+config.php
+composer.json
