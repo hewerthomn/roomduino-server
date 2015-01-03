@@ -24,7 +24,17 @@ class TemperaturesController extends BaseController
 		$temperature->created_at 	= new \DateTime;
 		try {
 			$temperature->save();
-		} catch (\Exception $e) { };
+		} catch (\Exception $e) {
+			return "<||{$e->getMessage()}>";
+		};
+
+		$date = date('M, d');
+		$time = date('H:i');
+
+		$vars = [$date, $time];
+
+		return Response::make($this->_formatVars($vars), 200)
+									 ->header('Content-Type', 'text/plain');
 	}
 
 	public function getList()
