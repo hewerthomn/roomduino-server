@@ -16,22 +16,25 @@ class TemperaturesController extends BaseController
 
 	public function getIndex()
 	{
-		$temperature = new Temperature;
-		$temperature->placename 	= Input::get('P');
-		$temperature->temperature = Input::get('T');
-		$temperature->humidity 		= Input::get('H');
-		$temperature->dew_point   = $temperature->dew_point();
-		$temperature->created_at 	= new \DateTime;
 		try {
+
+			$date = date('M, d');
+			$time = date('H:i');
+			$vars = [$date, $time];
+
+			$temperature = new Temperature;
+			$temperature->placename 	= Input::get('P');
+			$temperature->temperature = Input::get('T');
+			$temperature->humidity 		= Input::get('H');
+			$temperature->dew_point   = $temperature->dew_point();
+			$temperature->created_at 	= new \DateTime;
+
 			$temperature->save();
+
 		} catch (\Exception $e) {
-			return "<||{$e->getMessage()}>";
+			$message = strtoupper(substr($this->_clear($e->getMessage()), 0, 80));
+			$vars = [$date, $time, $message];
 		};
-
-		$date = date('M, d');
-		$time = date('H:i');
-
-		$vars = [$date, $time];
 
 		return Response::make($this->_formatVars($vars), 200)
 									 ->header('Content-Type', 'text/plain');
@@ -58,6 +61,14 @@ class TemperaturesController extends BaseController
 								 ->first();
 
 		return $temp;
+	}
+
+	private function _clear($var)
+	{
+		$var = str_replace('<', '', $var);
+		$var = str_replace('>', '', $var);
+		$var = str_replace('|', '', $var);
+		return $var;
 	}
 
 	private function _formatVars($vars = [], $startChar = '<', $endChar = '>', $separator = '|')
