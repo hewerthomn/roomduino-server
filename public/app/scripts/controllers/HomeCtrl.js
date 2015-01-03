@@ -7,10 +7,10 @@ function HomeCtrl($scope, $location, $interval, RoomDuino)
 			temperature: false
 		};
 
-		$scope.updateFrequency = 5 * 60000; // 60000 = 1 minute
+		$scope.updateFrequency = 5 * 6000; // 6000 = 1 minute
 
 		$scope.updateTemperature();
-		$interval($scope.updateTemperature, $scope.updateFrequency);
+		$interval(function() { $scope.updateTemperature(); }, $scope.updateFrequency);
 	};
 
 	function _applyPhase()
