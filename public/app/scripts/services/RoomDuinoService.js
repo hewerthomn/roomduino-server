@@ -18,9 +18,9 @@ function RoomDuinoService($http)
 
 		Photocell: {
 
-			actual: function()
+			actual: function(placename)
 			{
-				return $http.get(api_path + 'sensors/actual?sensor=photocell');
+				return $http.get(api_path + 'sensors/actual?sensor=photocell&placename=Room');
 			}
 		}
 	}

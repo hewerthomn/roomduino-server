@@ -8,4 +8,7 @@ class Sensor extends \Eloquent
 	protected $table = 'sensors';
 
 	public $timestamps = false;
+
+	protected $dates = ['created_at'];
+
 }

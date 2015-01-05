@@ -8,6 +8,8 @@ class Temperature extends \Eloquent
 
 	public $timestamps = false;
 
+	protected $dates = ['created_at'];
+
 	public function dew_point($temp = null, $humidity = null)
 	{
 		$this->temperature = ($temp != null) ? $temp : $this->temperature;
