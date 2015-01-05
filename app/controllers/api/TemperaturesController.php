@@ -32,11 +32,11 @@ class TemperaturesController extends BaseController
 			$temperature->save();
 
 		} catch (\Exception $e) {
-			$message = strtoupper(substr($this->_clear($e->getMessage()), 0, 80));
+			$message = strtoupper(substr(clear_vars($e->getMessage()), 0, 80));
 			$vars = [$date, $time, $message];
 		};
 
-		return Response::make($this->_formatVars($vars), 200)
+		return Response::make(format_vars($vars), 200)
 									 ->header('Content-Type', 'text/plain');
 	}
 
@@ -61,22 +61,5 @@ class TemperaturesController extends BaseController
 								 ->first();
 
 		return $temp;
-	}
-
-	private function _clear($var)
-	{
-		$var = str_replace('<', '', $var);
-		$var = str_replace('>', '', $var);
-		$var = str_replace('|', '', $var);
-		return $var;
-	}
-
-	private function _formatVars($vars = [], $startChar = '<', $endChar = '>', $separator = '|')
-	{
-		$result = $startChar;
-		$result .= implode($separator, $vars);
-		$result .= $endChar;
-
-		return $result;
 	}
 }

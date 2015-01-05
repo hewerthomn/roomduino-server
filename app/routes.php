@@ -12,4 +12,5 @@ Route::group(['namespace' => 'App\Controllers'], function()
 Route::group(['prefix' => 'api', 'namespace' => 'App\Controllers\Api'], function()
 {
 	Route::controller('temperatures', 'TemperaturesController');
+	Route::controller('sensors', 'SensorsController');
 });

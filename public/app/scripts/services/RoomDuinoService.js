@@ -14,6 +14,14 @@ function RoomDuinoService($http)
 			{
 				return $http.get(api_path + 'temperatures/actual?P=Room');
 			}
+		},
+
+		Photocell: {
+
+			actual: function()
+			{
+				return $http.get(api_path + 'sensors/actual?sensor=photocell');
+			}
 		}
 	}
 };

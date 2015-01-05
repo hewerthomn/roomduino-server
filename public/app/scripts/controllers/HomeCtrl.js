@@ -10,8 +10,22 @@ function HomeCtrl($scope, $location, $interval, RoomDuino)
 		$scope.updateFrequency = 5 * 6000; // 6000 = 1 minute
 
 		$scope.updateTemperature();
-		$interval(function() { $scope.updateTemperature(); }, $scope.updateFrequency);
+		$scope.updatePhotocell();
+
+		$interval(function() {
+			$scope.updateTemperature();
+			$scope.updatePhotocell();
+		}, $scope.updateFrequency);
 	};
+
+	function _statusPhotocell(value)
+	{
+		if(value < 10) return 'Trevas';
+		else if(value < 200) return 'Escuro';
+		else if(value < 500) return 'Iluminado';
+		else if(value < 800) return 'Claro';
+		else return 'Muito Claro';
+	}
 
 	function _applyPhase()
 	{
@@ -29,6 +43,19 @@ function HomeCtrl($scope, $location, $interval, RoomDuino)
 			})
 			.error(function(error) {
 				$scope.updating.temperature = false;
+				console.error(error);
+			});
+	};
+
+	$scope.updatePhotocell = function()
+	{
+		RoomDuino.Photocell.actual()
+			.success(function(data) {
+				$scope.photocell = data;
+				$scope.photocell.status = _statusPhotocell(data.value);
+				_applyPhase();
+			})
+			.error(function(error) {
 				console.error(error);
 			});
 	};
