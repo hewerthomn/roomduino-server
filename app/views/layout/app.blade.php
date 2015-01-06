@@ -11,7 +11,7 @@
 	  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="mobile-web-app-capable" content="yes">
 
-		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="apple-touch-icon apple-touch-icon-precomposed" href="/img/apple-touch-icon.png">
   	<link rel="apple-touch-icon apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144.png">
 		@yield('styles')
